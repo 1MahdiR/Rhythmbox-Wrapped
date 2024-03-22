@@ -21,7 +21,7 @@ for entry in root.findall('./entry[@type="song"]'):
     duration = int(entry.find('duration').text)
     play_count_element = entry.find('play-count')
     play_count = int(play_count_element.text) if play_count_element is not None else 0
-    sum_duration += duration
+    sum_duration += duration * play_count
     sum_play_count += play_count
     
     if most_played_song_play_count < play_count:
@@ -70,7 +70,7 @@ draw.text((20, 20), f"Rhythmbox-Wrapped", fill='white', font=title_font)
 
 draw.text((18, 44), f"_"*30, fill='white', font=summary_font)
 
-draw.text((20, 85), f"Total Time Listened: {sum_duration_hours}:{sum_duration_minutes}':{sum_duration_secends}\"", fill='white', font=summary_font)
+draw.text((20, 85), f"Total Time Listened:  {sum_duration_hours}:{sum_duration_minutes}':{sum_duration_secends}\"", fill='white', font=summary_font)
 
 draw.text((20, 123), f"Play Count: {sum_play_count}", fill='white', font=summary_font)
 
@@ -91,4 +91,4 @@ draw.text((40, 493), f"Play Count: {second_most_played_song.find('play-count').t
 
 draw.text((20, 540), f"By using the \"Rhythmbox-wrapped\" you are implying that you genuinely dislike \"Spotify\" as a platform for listening to music.", fill='white', font=panel_font)
 
-image.save('summary_image.png')
+image.save('Rhythmbox-Wrapped.png')
