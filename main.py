@@ -46,13 +46,6 @@ no_spotify_image = no_spotify_image.resize((18, 18))
 
 bottom_panel = Image.new(background_image.mode, (556, 20), (0, 0, 0, 255))
 
-fonts_dir = 'fonts'
-
-fonts = [file for file in os.listdir(fonts_dir) if file.endswith('.ttf')]
-
-font_file = random.choice(fonts)
-font_path = os.path.join(fonts_dir, font_file)
-
 image = Image.new(background_image.mode, background_image.size)
 
 background_image.paste(bottom_panel, (0, 536))
@@ -62,10 +55,10 @@ image.paste(background_image, (0, 0))
 	
 draw = ImageDraw.Draw(image)
 
-title_font = ImageFont.truetype(font_path, size=48)
-summary_font = ImageFont.truetype(font_path, size=26)
-sub_summary_font = ImageFont.truetype(font_path, size=22)
-panel_font = ImageFont.truetype(font_path, size=10)
+title_font = ImageFont.truetype("fonts/TimmanaRegular.ttf", size=48)
+summary_font = ImageFont.truetype("fonts/Manjari-Regular.otf", size=26)
+sub_summary_font = ImageFont.truetype("fonts/Manjari-Thin.otf", size=22)
+panel_font = ImageFont.truetype("fonts/TimmanaRegular.ttf", size=10)
 
 draw.text((20, 20), f"Rhythmbox-Wrapped", fill='white', font=title_font)
 
