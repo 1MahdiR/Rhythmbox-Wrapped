@@ -50,12 +50,12 @@ background_image = background_image.resize((556, 556))
 no_spotify_image = Image.open("assets/no_spotify.png").convert("RGBA")
 no_spotify_image = no_spotify_image.resize((18, 18))
 
-bottom_panel = Image.new(background_image.mode, (556, 20), (0, 0, 0, 255))
+bottom_panel = Image.new(background_image.mode, (556, 30), (0, 0, 0, 255))
 
 image = Image.new(background_image.mode, background_image.size)
 
-background_image.paste(bottom_panel, (0, 536))
-background_image.paste(no_spotify_image, (1, 537), mask=no_spotify_image)
+background_image.paste(bottom_panel, (0, 526))
+background_image.paste(no_spotify_image, (1, 532), mask=no_spotify_image)
 
 image.paste(background_image, (0, 0))
 	
@@ -65,6 +65,7 @@ title_font = ImageFont.truetype("fonts/Campton-BoldDEMO.otf", size=36)
 summary_font = ImageFont.truetype("fonts/Manjari-Regular.otf", size=26)
 sub_summary_font = ImageFont.truetype("fonts/Manjari-Thin.otf", size=22)
 panel_font = ImageFont.truetype("fonts/Manjari-Thin.otf", size=10)
+panel_font_2nd = ImageFont.truetype("fonts/Manjari-Thin.otf", size=12)
 
 draw.text((20, 20), f"Rhythmbox-Wrapped", fill='white', font=title_font)
 
@@ -88,7 +89,7 @@ draw.text((40, 433), f"Album: {second_most_played_song.find('album').text}", fil
 draw.text((40, 463), f"Genre: {second_most_played_song.find('genre').text}", fill='white', font=sub_summary_font)
 draw.text((40, 493), f"Play Count: {second_most_played_song.find('play-count').text}", fill='white', font=sub_summary_font)
 
-
-draw.text((20, 540), f"By using the \"Rhythmbox-wrapped\" you are implying that you genuinely dislike \"Spotify\" as a platform for listening to music.", fill='white', font=panel_font)
+draw.text((20, 533), f"By using the \"Rhythmbox-wrapped\" you are implying that you genuinely dislike \"Spotify\" as a platform for listening to music.", fill='white', font=panel_font)
+draw.text((205, 545), f"Rhythmbox-Wrapped, By MR", fill='white', font=panel_font_2nd)
 
 image.save('Rhythmbox-Wrapped.png')
