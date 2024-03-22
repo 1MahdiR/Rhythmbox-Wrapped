@@ -21,13 +21,17 @@ for entry in root.findall('./entry[@type="song"]'):
 background_images_dir = 'images'
 
 background_images = [file for file in os.listdir(background_images_dir) if file.endswith('.jpg')]
-no_spotify_image = open("
 
 background_image_file = random.choice(background_images)
 background_image_path = os.path.join(background_images_dir, background_image_file)
 
-background_image = Image.open(background_image_path)
-background_image = background_image.resize((486, 486))
+background_image = Image.open(background_image_path).convert("RGBA")
+background_image = background_image.resize((556, 556))
+
+no_spotify_image = Image.open("assets/no_spotify.png").convert("RGBA")
+no_spotify_image = no_spotify_image.resize((18, 18))
+
+bottom_panel = Image.new(background_image.mode, (556, 20), (0, 0, 0, 255))
 
 fonts_dir = 'fonts'
 
@@ -38,21 +42,25 @@ font_path = os.path.join(fonts_dir, font_file)
 
 image = Image.new(background_image.mode, background_image.size)
 
-image.paste(background_image, (0, 0))
+background_image.paste(bottom_panel, (0, 536))
+background_image.paste(no_spotify_image, (1, 537), mask=no_spotify_image)
 
+image.paste(background_image, (0, 0))
+	
 draw = ImageDraw.Draw(image)
 
-font_size = 36
+title_font = ImageFont.truetype(font_path, size=48)
+summary_font = ImageFont.truetype(font_path, size=36)
+panel_font = ImageFont.truetype(font_path, size=10)
 
-font = ImageFont.truetype(font_path, size=font_size)
+draw.text((20, 20), f"Rhythmbox-Wrapped", fill='white', font=title_font)
 
-duration_text_x = 20
-duration_text_y = 20
-play_count_text_x = 20
-play_count_text_y = duration_text_y + 46
+draw.text((18, 74), f"/"*75, fill='white', font=panel_font)
 
-draw.text((duration_text_x, duration_text_y), f"Duration: {sum_duration}", fill='white', font=font)
+draw.text((20, 110), f"Duration: {sum_duration}", fill='white', font=summary_font)
 
-draw.text((play_count_text_x, play_count_text_y), f"Play Count: {sum_play_count}", fill='white', font=font)
+draw.text((20, 176), f"Play Count: {sum_play_count}", fill='white', font=summary_font)
+
+draw.text((20, 540), f"By using the \"Rhythmbox-wrapped\" you are implying that you genuinely dislike \"Spotify\" as a platform for listening to music.", fill='white', font=panel_font)
 
 image.save('summary_image.png')
